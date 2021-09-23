@@ -7,7 +7,10 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/440px-Laravel.svg.png" style="width: 150px; height:150px;" class="rounded-circle" />
       </div>
       <div class="col-9 pt-5">
-        <div><h1>{{$user->username}}</h1></div>
+        <div class="d-flex justify-content-between align-items-baseline">
+            <h1>{{$user->username}}</h1>
+            <a href="#">Add New Post</a>
+        </div>
         <div class="d-flex pb-3"> 
             <div class="pr-5"><strong>100</strong> posts</div>
             <div class="pr-5"><strong>20.2k</strong> followers</div>
