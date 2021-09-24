@@ -40,6 +40,13 @@ class PostsController extends Controller
         ]);
 
         return redirect('/profile/' . auth()->user()->id);
-        //return view('posts/create');
+    }
+
+    // If route param has same name in the controller and the route in web.php,
+    // then we can use type hints to do the Route Model binding.
+    public function show(\App\Models\Post $post)
+    {
+        // compact('post') === ['post' => $post]
+        return view('posts/show', compact('post'));
     }
 }
