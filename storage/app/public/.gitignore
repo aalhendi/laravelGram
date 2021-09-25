@@ -1,2 +1,5 @@
 *
 !.gitignore
+!profile/
+!uploads/
+!profile/empty-profile.jpg

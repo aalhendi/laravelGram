@@ -40,12 +40,14 @@ class ProfilesController extends Controller
             
             $image = Image::make(public_path($imagePath))->fit(1000, 1000);
             $image->save();
+
+            $imageArray = ['image' => $imagePath];
         }
         
         // Include auth() before user to only accept data from the current authenticated user
         auth()->user()->profile->update(array_merge(
             $data,
-            ['image' => $imagePath]
+            $imageArray ?? []
         ));
 
         return redirect('profile/' . $user->id);
