@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Models\User;
 
 class ProfilesController extends Controller
@@ -29,13 +30,24 @@ class ProfilesController extends Controller
 
         $data = request()->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => '',
             'url' => 'url | nullable',
+            'image' => '',
         ]);
 
+        if (request('image')) {
+            $imagePath = '/storage/' . request('image')->store('profile', 'public');
+            
+            $image = Image::make(public_path($imagePath))->fit(1000, 1000);
+            $image->save();
+        }
+        
         // Include auth() before user to only accept data from the current authenticated user
-        auth()->user()->profile->update($data);
+        auth()->user()->profile->update(array_merge(
+            $data,
+            ['image' => $imagePath]
+        ));
 
-        return redirect('/profile/' . $user->id);
+        return redirect('profile/' . $user->id);
     }
 }

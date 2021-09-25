@@ -11,6 +11,7 @@ class Profile extends Model
         'title',
         'description',
         'url',
+        'image',
     ];
     public function user()
     {

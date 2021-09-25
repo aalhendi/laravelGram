@@ -30,7 +30,7 @@
                     <label for="description" class="col-md-4 col-form-label">Description</label>
 
                     <input id="description" type="text" class="form-control @error('description') is-invalid @enderror"
-                        name="description" value="{{ old('description') ?? $user->profile->description }}" autocomplete="description" required autofocus>
+                        name="description" value="{{ old('description') ?? $user->profile->description }}" autocomplete="description" autofocus>
 
                     @error('description')
                     <span class="invalid-feedback" role="alert">
