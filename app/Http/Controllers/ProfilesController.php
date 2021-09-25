@@ -7,12 +7,31 @@ use App\Models\User;
 
 class ProfilesController extends Controller
 {
-    public function index($user)
+    public function index(User $user)
     {
-        $user = User::findOrFail($user);
+        // If not using User model from \App\Models\User,
+        // Then user must be retrieved as such:
+        // $user = User::findOrFail($user);
 
-        return view('profiles/index', [
-            'user' => $user,
+        return view('profiles/index', compact('user'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('profiles/edit', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'url' => 'url | nullable',
         ]);
+
+        // Include auth() before user to only accept data from the current authenticated user
+        auth()->user()->profile->update($data);
+
+        return redirect('/profile/' . $user->id);
     }
 }
