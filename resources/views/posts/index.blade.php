@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
 
+    @if ($posts['items'])
     @foreach ($posts as $post)
     <div class="row">
         <div class="col-6 offset-3">
@@ -23,12 +24,21 @@
             </p>
         </div>
     </div>
+    @endforeach
+    @else
+    <div class="row  justify-content-center">
+        <h3>
+            No posts to show :(
+            <br>
+            Follow some users to start seeing posts!
+        </h3>
+    </div>
 </div>
-@endforeach
 
 <div class="row d-flex justify-content-center">
     <col-12>{{$posts->links()}}</col-12>
 </div>
 
 </div>
+@endif
 @endsection
