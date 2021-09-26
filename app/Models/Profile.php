@@ -13,12 +13,19 @@ class Profile extends Model
         'url',
         'image',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function profileImage()
     {
         return ($this->image) ? $this->image : "/storage/profile/empty-profile.jpg";
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

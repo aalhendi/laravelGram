@@ -14,13 +14,15 @@ class ProfilesController extends Controller
         // Then user must be retrieved as such:
         // $user = User::findOrFail($user);
 
-        return view('profiles/index', compact('user'));
+        $isFollowing = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+        return view('profiles/index', compact('user', 'isFollowing'));
     }
 
     public function edit(User $user)
     {
         $this->authorize('update', $user->profile);
-        
+
         return view('profiles/edit', compact('user'));
     }
 
@@ -37,13 +39,13 @@ class ProfilesController extends Controller
 
         if (request('image')) {
             $imagePath = '/storage/' . request('image')->store('profile', 'public');
-            
+
             $image = Image::make(public_path($imagePath))->fit(1000, 1000);
             $image->save();
 
             $imageArray = ['image' => $imagePath];
         }
-        
+
         // Include auth() before user to only accept data from the current authenticated user
         auth()->user()->profile->update(array_merge(
             $data,
