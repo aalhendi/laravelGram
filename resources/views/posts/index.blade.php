@@ -2,13 +2,11 @@
 
 @section('content')
 <div class="container">
-
-    @if ($posts['items'])
-    @foreach ($posts as $post)
+    @forelse($posts as $post)
     <div class="row">
         <div class="col-6 offset-3">
             <a href="/p/{{$post->user->profile->id}}">
-                <img src="{{$post->image}}" alt="" class="w-100">
+                <img src="{{$post->image}}" alt="" class="w-100" />
             </a>
         </div>
     </div>
@@ -24,21 +22,20 @@
             </p>
         </div>
     </div>
-    @endforeach
-    @else
+
+    @empty
     <div class="row  justify-content-center">
-        <h3>
+        <h3 class="text-center">
             No posts to show :(
-            <br>
+            <br />
             Follow some users to start seeing posts!
         </h3>
     </div>
-</div>
+    @endforelse
 
-<div class="row d-flex justify-content-center">
-    <col-12>{{$posts->links()}}</col-12>
-</div>
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="pagination">{{$posts->links()}}</div>
+    </div>
 
 </div>
-@endif
 @endsection

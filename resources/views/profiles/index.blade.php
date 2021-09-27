@@ -2,45 +2,44 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-3 p-5">
-            <img src="{{$user->profile->profileImage()}}" class="rounded-circle w-100" />
-        </div>
-        <div class="col-9 pt-5">
-            <div class="d-flex justify-content-between align-items-baseline">
-                <div class="d-flex align-items-center pb-3">
-                    <div class="h3">{{$user->username}}</div>
-                    <follow-button user-id="{{$user->id}}" is-following="{{$isFollowing}}" />
-                </div>
-
-                @can('update', $user->profile)
-                <a href="/p/create">Add New Post</a>
-                @endcan
-            </div>
-
-            @can('update', $user->profile)
-            <a href="/profile/{{$user->id}}/edit">Edit Profile</a>
-            @endcan
-
-            <div class="d-flex pb-3">
-                <div class="pr-5"><strong>{{$postCount}}</strong> posts</div>
-                <div class="pr-5"><strong>{{$followerCount}}</strong> followers</div>
-                <div class="pr-5"><strong>{{$followingCount}}</strong> following</div>
-            </div>
-            <div class="font-weight-bold">{{$user->profile->title}}</div>
-            <div>{{$user->profile->description}}</div>
-            <div>
-                <a href="{{$user->profile->url ?? "#"}}">{{$user->profile->url}}</a>
-            </div>
-        </div>
-        <div class="row pt-5">
-            @foreach ($user->posts as $post)
-            <div class="col-4 pb-4">
-                <a href="/p/{{$post->id}}">
-                    <img src="{{$post->image}}" class="w-100" />
+    @forelse ($profiles as $profile)
+    <div class="row offset-5">
+        <div class="py-4 d-flex align-items-center">
+            <a href="/profile/{{$profile->user->id}}">
+                <img src="{{$profile->image ? $profile->image : "/storage/profile/empty-profile.jpg"}}" alt=""
+                    class="rounded-circle mr-5" style="max-width:100px" />
+            </a>
+            <p>
+                <span class="font-weight-bold">
+                    <a href="/profile/{{$profile->user->id}}">
+                        <span class="h3 text-dark">{{$profile->user->username}}</span>
+                    </a>
+                </span>
+                <br />
+                <a href="/profile/{{$profile->user->id}}">
+                    <span class="h5 text-dark">{{$profile->title}}</span>
                 </a>
-            </div>
-            @endforeach
+            </p>
         </div>
     </div>
-    @endsection
+
+    @empty
+    <div class="row justify-content-center">
+        <h3 class="text-center">
+            No results found for
+            <br />
+            <strong>{{request()->query('search')}}</strong>
+            <br />
+            :(
+        </h3>
+    </div>
+    @endforelse
+
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="pagination">
+            {{$profiles->appends(['search' =>request()->query('search')])->links()}}
+        </div>
+    </div>
+
+</div>
+@endsection

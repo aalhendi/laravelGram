@@ -9,7 +9,7 @@ use App\Models\User;
 
 class ProfilesController extends Controller
 {
-    public function index(User $user)
+    public function show(User $user)
     {
         // If not using User model from \App\Models\User,
         // Then user must be retrieved as such:
@@ -40,7 +40,7 @@ class ProfilesController extends Controller
             }
         );
 
-        return view('profiles/index', compact('user', 'isFollowing', 'postCount', 'followerCount', 'followingCount'));
+        return view('profiles/show', compact('user', 'isFollowing', 'postCount', 'followerCount', 'followingCount'));
     }
 
     public function edit(User $user)
