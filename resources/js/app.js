@@ -27,6 +27,7 @@ Vue.component(
     "follow-button",
     require("./components/buttons/FollowButton.vue").default
 );
+Vue.component("search-bar", require("./components/SearchBar.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

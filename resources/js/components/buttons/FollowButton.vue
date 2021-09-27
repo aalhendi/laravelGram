@@ -2,7 +2,7 @@
     <div class="container">
         <button
             @click="followUser()"
-            class="btn btn-primary"
+            :class="buttonClass"
             v-text="buttonText"
         />
     </div>
@@ -16,7 +16,13 @@ export default {
         async followUser() {
             try {
                 await axios.post(`/follow/${this.userId}`);
-                this.status = !this.status;
+                if (this.status) {
+                    if (confirm("Do you really wish to unfollow?")) {
+                        this.status = !this.status;
+                    }
+                } else {
+                    this.status = !this.status;
+                }
             } catch (error) {
                 if (error.response.status === 401) {
                     window.location = "/login";
@@ -34,10 +40,10 @@ export default {
     computed: {
         buttonText() {
             return this.status ? "Unfollow" : "Follow";
+        },
+        buttonClass() {
+            return this.status ? "btn btn-danger" : "btn btn-primary";
         }
-    },
-    mounted() {
-        console.log("Component mounted.");
     }
 };
 </script>
