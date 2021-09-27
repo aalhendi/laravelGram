@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <form @submit="handleSubmit">
+        <form @submit="handleSubmit" action="/search" method="GET">
             <input
                 v-model="search"
                 type="text"
                 placeholder="Search"
-                name="search"
+                name="q"
                 class="form-control form-control-md border-end-0 border rounded-pill rounded-end"
             />
         </form>

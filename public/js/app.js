@@ -38748,30 +38748,37 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("form", { on: { submit: _vm.handleSubmit } }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.search,
-            expression: "search"
-          }
-        ],
-        staticClass:
-          "form-control form-control-md border-end-0 border rounded-pill rounded-end",
-        attrs: { type: "text", placeholder: "Search", name: "search" },
-        domProps: { value: _vm.search },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c(
+      "form",
+      {
+        attrs: { action: "/search", method: "GET" },
+        on: { submit: _vm.handleSubmit }
+      },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
             }
-            _vm.search = $event.target.value
+          ],
+          staticClass:
+            "form-control form-control-md border-end-0 border rounded-pill rounded-end",
+          attrs: { type: "text", placeholder: "Search", name: "q" },
+          domProps: { value: _vm.search },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
           }
-        }
-      })
-    ])
+        })
+      ]
+    )
   ])
 }
 var staticRenderFns = []

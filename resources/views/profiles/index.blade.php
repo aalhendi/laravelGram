@@ -25,13 +25,13 @@
 
     @empty
     <div class="row justify-content-center">
-        <h3 class="text-center">
+        <h4 class="text-center">
             No results found for
             <br />
-            <strong>{{request()->query('search')}}</strong>
+            <strong>{{request()->query('q')}}</strong>
             <br />
             :(
-        </h3>
+        </h4>
     </div>
     @endforelse
 
