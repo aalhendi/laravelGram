@@ -5,7 +5,13 @@
     @forelse($posts as $post)
     <div class="row">
         <div class="col-6 offset-3">
-            <a href="/p/{{$post->user->profile->id}}">
+            <div class="d-flex align-items-center">
+                <a href="/profile/{{$post->user->profile->id}}">
+                    <img class="rounded-circle w-20 mb-2 mr-2" style="max-width:30px" src="{{$post->user->profile->image}}" alt="" />
+                    <span class="h6 text-dark font-weight-bold">{{$post->user->username}}</span>
+                </a>
+            </div>
+            <a href="/p/{{$post->id}}">
                 <img src="{{$post->image}}" alt="" class="w-100" />
             </a>
         </div>
