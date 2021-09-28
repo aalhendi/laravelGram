@@ -7,7 +7,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cache;
 use App\Models\User;
 
-class ProfilesController extends Controller
+class ProfileController extends Controller
 {
     public function show(User $user)
     {

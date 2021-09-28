@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PostsController::class, 'index']);
+Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 
 Auth::routes();
 
@@ -26,10 +26,10 @@ Route::post('follow/{user}', [\App\Http\Controllers\FollowsController::class, 's
 
 Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index']);
 
-Route::get('/p/create', [App\Http\Controllers\PostsController::class, 'create']);
-Route::post('/p', [App\Http\Controllers\PostsController::class, 'store']);
-Route::get('/p/{post}', [App\Http\Controllers\PostsController::class, 'show']);
+Route::get('/p/create', [App\Http\Controllers\PostController::class, 'create']);
+Route::post('/p', [App\Http\Controllers\PostController::class, 'store']);
+Route::get('/p/{post}', [App\Http\Controllers\PostController::class, 'show']);
 
-Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'show'])->name('profile.show');
-Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
+Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
