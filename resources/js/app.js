@@ -27,6 +27,10 @@ Vue.component(
     "follow-button",
     require("./components/buttons/FollowButton.vue").default
 );
+Vue.component(
+    "like-button",
+    require("./components/buttons/LikeButton.vue").default
+);
 Vue.component("search-bar", require("./components/SearchBar.vue").default);
 Vue.component(
     "dropdown-menu",

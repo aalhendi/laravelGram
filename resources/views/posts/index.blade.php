@@ -18,6 +18,7 @@
     </div>
     <div class="row pt-2 pb-4">
         <div class="col-6 offset-3">
+            <like-button user-id="{{auth()->user()->id}}" />
             <p>
                 <span class="font-weight-bold">
                     <a href="/profile/{{$post->user->id}}">
